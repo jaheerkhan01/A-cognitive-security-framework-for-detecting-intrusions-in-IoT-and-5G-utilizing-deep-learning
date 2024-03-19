@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container{
+        margin: 45px;
+        background-color: aliceblue;
+        border-radius: 5%;
+    }
+
+    body{
+        background-color:  #5b5b5b;
+        color: rgb(29, 30, 31);
+    }
+    
+    .txt{
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        width: 100%;
+        height: 20vh;
+        font-size: 19px;
+    }
+
+    .txt1, .txt2{
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        width: 100%;
+        height: 8vh;
+        font-size: 19px;
+
+    }
+
+    input[type="file"] {
+            width: 500px;
+            height: 100px;
+            padding: 5px;
+    }
+    button {
+            padding: 8px 16px;
+            background-color: black;
+            color: white;
+    }
+    .buton{
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        
+    }
+
+    #output {
+        margin: 30px;
+        display: flex; 
+        justify-content: center;
+        columns: 2;
+        width: 100%;
+        height: 60vh;
+
+    }
+
+    #output, h2{
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    #output, img{
+        height: 450px;
+        width: auto;
+        border: none;
+    }
+
+    #output, img{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+        border-radius: 5%;
+        border: none;
+    }
+
+    .first, .second{
+        margin: 30px;
+    }
+
+
+    .inp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 25vh;
+        width: 100%;
+    }
+    
+    .input{
+        font-size: 25px;
+        margin-left: 50px;
+    }
+
+   .results{
+        display: flex;
+        width: 100%;
+        height: 30vh;  
+    }
+
+    .results, h2{
+        display: flex;
+        justify-content: center;
+        align-items: end;
+    }
+
+    .logo{
+        display: flex;
+        justify-content: center;
+        height: 150px;
+        background-color: aliceblue;
+        margin-bottom: 80px;
+    }
+
+    #nitk{
+        height: 150px;
+        width: 150px;
+    }
+
+    .team{
+        display: flex;
+        justify-content: center;
+    }
+
+    .names{
+        font-size: 35px;
+        text-decoration-line: none;
+    }
+
+    button{
+        width: 100px;
+        height: 50px;
+        font-size: 20px;
+        border-radius: 5%;
+        border: none;
+        background-color: rgb(73, 203, 255);
+        color: #000000;
+    }
+
+  
+</style>
+<body>
+    <div class="container">
+
+        <div class="txt1">
+            <h1>National Institute of Technology Karnataka , Surathkal</h1>
+        </div>
+        <div class="txt2">
+            <h1>Department of Information Technology</h1>
+        </div>
+        <div class="logo">
+            <img src="{{url_for('static', filename='/images/NITK_Emblem.png')}}" id="nitk" alt="" height="300px">
+        </div>
+        <div class="txt">
+            <h1>A cognitive security framework for detecting intrusions in IoT and 5G utilizing deep learning</h1>
+        </div>
+
+        
+
+        <div class="team">
+            <ul class="names">
+                <li>Shuaib jawid - 211IT087</li>
+                <li>Ashwani kumar - 211IT013</li>
+                <li>Jaheer khan - 211IT026</li>
+            </ul>
+        </div>
+    
+        <div class="inp">
+                <form action="/process" method="POST" enctype="multipart/form-data">
+                <input type="file" name="inputFile" class="input" id="inputFile" accept=".csv">
+
+                    <div class="buton">
+                        <button type="submit">Process</button>
+                    </div>
+                </form>
+        </div>
+    <div id="output">
+        <div class="first">
+        <h2>Grayscale Image</h2>
+        <img src= "{{url_for('static', filename='/images/generated_gray.png')}}" alt="">
+    </div>
+    
+    <div class="second">
+        <h2>RGB Image</h2>
+        <img src="{{url_for('static', filename='/images/generated_rgb.png')}}" alt="">
+    </div>
+    
+   </div>
+
+   <div class="results">
+        <h2> Classification(Attack or benign): <p>{{ prediction }}</p></h2>
+   </div>
+</div>
+</body>
+</html>

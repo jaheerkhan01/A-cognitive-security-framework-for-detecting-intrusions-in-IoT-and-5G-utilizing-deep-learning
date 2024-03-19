@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload CSV File</title>
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .image-container img {
+            max-width: 45%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload CSV File</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="csvFile" name="csvFile">
+        <button type="button" onclick="uploadFile()">Upload</button>
+    </form>
+
+    <div id="imageContainer" class="image-container"></div>
+
+    <script>
+        function uploadFile() {
+            var formData = new FormData();
+            var fileInput = document.getElementById('csvFile');
+            formData.append('inputFile', fileInput.files[0]);
+
+            fetch('/process', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                var imageContainer = document.getElementById('imageContainer');
+                imageContainer.innerHTML = '';
+
+                var grayImg = new Image();
+                grayImg.src = 'data:image/png;base64,' + arrayBufferToBase64(data.image_gray);
+                grayImg.alt = 'Grayscale Image';
+                imageContainer.appendChild(grayImg);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function arrayBufferToBase64(buffer) {
+            var binary = '';
+            var bytes = new Uint8Array(buffer);
+            var len = bytes.byteLength;
+            for (var i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return window.btoa(binary);
+        }
+    </script>
+</body>
+</html>
