@@ -122,10 +122,9 @@ def expand_features_to_grayscale_image2(features, image_height=64, image_width=6
 
     return Z_new
 
-model_rgb_path = 'models\model_rgb (1).h5' 
-model_gray_path = 'models\model_gray (1).h5' 
-model_rgb = load_model(model_rgb_path)
-model_gray = load_model(model_gray_path)
+model_rgb_path = 'model_rgb.h5' 
+model_rgb = load_model(model_rgb_path)x
+model_gray = load_model(model_rgb_path)
 
 def preprocess_image(image_file, grayscale=False):
     """
